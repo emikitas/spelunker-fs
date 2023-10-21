@@ -15,6 +15,9 @@ fn main(){
     println!("Starting at {}", args.path);
     match walk::walk::list_dir(args.path) {
         Ok(v) => v,
-        Err(_) => {return;},
+        Err((err, v)) => {
+            println!("mapping failed with: {:?} but here's what we got: {:?}", err, v);
+            v
+        },
     }.iter().for_each(|entity| println!("{}", entity));
 }
